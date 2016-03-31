@@ -54,7 +54,7 @@ Folgende Schritte müssen ausgeführt werden:
 
 1. Folgende Daten (Client Id, Tenant Id, Subscription Id) sind für nachfolgende Konfigurationen notwendig: 
 
-	![Client Id](./images/clientId.png)
+	![Client Id](./images/clientID.png)
 
 
 1. Klicken Sie auf **Endpunkte anzeigen** und kopieren Sie eine beliebige Zeile. Die Tenant-Id können Sie extrahieren: https://login.microsoftonline.com/ **<Ihre-Tenant-ID>** / 
@@ -136,7 +136,7 @@ Folgende Schritte müssen ausgeführt werden:
 1.	Suchen Sie den Thumbprint Ihres eben erstellten Zertifikats:
     > dir Cert:\LocalMachine\My
 
-	![Get Thumbprint](./images/get-thumbprint.png)
+	![Get Thumbprint](./images/getThumbprint.png)
 
 2.	Fügen Sie das Zertifikat dem Trusted Root Store hinzu
     > $cert = (get-item cert:\LocalMachine\My\A70E0D9E39C32B482E8A8D7776462A9470DEF441)
