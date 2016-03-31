@@ -18,7 +18,7 @@ Folgende Schritte müssen ausgeführt werden:
 
 * Download des GitHub Projekts
 * [Erstellen einer Azure AD Web Applikation](#aad-app)
-* [Zuweisen der gesamten Subscription zum Service Principal](#sp)
+* [Erstellen des Service Principal](#sp)
 * [Erstellen eines Zertifikats](#create-cert)
 * [Setzen des Zertifikats als Schlüssel/Passwort für die Billing Applikation](#set-up-cert)
 * [Hinzufügen des Zertifikats zum lokalen Zertifikatspeicher](#add-cert)
@@ -79,7 +79,7 @@ Folgende Schritte müssen ausgeführt werden:
 
 
 <a name="sp"></a>
-## Zuweisen der gesamten Subscription zum Service Principal
+## Erstellen des Service Principal
 
 1. Öffnen Sie Azure Powershell als Administrator.
 
