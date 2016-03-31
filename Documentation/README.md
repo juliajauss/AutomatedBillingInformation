@@ -156,4 +156,4 @@ Folgende Schritte müssen ausgeführt werden:
 2. Ersetzen Sie die gegebenen Parameter durch Ihre eigenen, die Sie im Schritt [Erstellen einer Azure AD Web Applikation](#aad-app) konfiguriert haben. 
 
 1. Öffnen Sie die **Program.cs** Projektdatei und 
-3. Starten Sie das Projekt 
+3. Starten Sie das Projekt. 
