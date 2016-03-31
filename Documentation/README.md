@@ -85,13 +85,18 @@ Folgende Schritte müssen ausgeführt werden:
 
 1. Melden Sie sich in Azure mit Ihrer Microsoft Identität an um Ihrem Service Principal Rollen oder das Abonement zuzuweisen.
 
-	>  Switch-AzureMode -Name AzureResourceManager
-    >  Add-AzureAccount # This will pop up a login dialog
+	>  Login-AzureRmAccount # This will pop up a login dialog
     
 1. So gewähren Sie dem Service Principal Zugriff zur kompletten Subscription:
 
-    > Select-AzureSubscription -SubscriptionId <subscription-id>
-    > New-AzureRoleAssignment -ServicePrincipalName <tenant-id> -RoleDefinitionName Contributor
+    > Select-AzureRmSubscription -SubscriptionId <subscription-id>
+
+1. Stellen Sie eine Verbindung mit Azure AD her. Für weitere Informationen: https://technet.microsoft.com/library/jj151815.aspx
+    > connect-msolservice
+
+1. Erstellen Sie einen neuen Service Principal:
+    > New-AzureRmADServicePrincipal -ApplicationId "<your-client-Id>"
+    >  New-AzureRmRoleAssignment -ServicePrincipalName "<your-client-Id>" -RoleDefinitionName Contributor
 
 1. Mit dem Befehl **Get-AzureRoleAssignment** können Sie überprüfen, ob die Zuweisung erfolgreich war.
 
@@ -110,24 +115,17 @@ Folgende Schritte müssen ausgeführt werden:
 <a name="set-up-cert"></a>
 ## Setzen des Zertifikats als Schlüssel/Passwort für die Billing Applikation
 
-1. Öffnen Sie das Windows Azure Active Directory Powershell Modul. 
-
-* Stellen Sie eine Verbindung mit Azure AD her. Für weitere Informationen: https://technet.microsoft.com/library/jj151815.aspx
-    > connect-msolservice
-
-* Geben Sie bitte Ihre Anmeldeinformationen ein.
-
-* Erstellen Sie ein neues X509 Zertifikat Objekt:
+1. Erstellen Sie ein neues X509 Zertifikat Objekt:
     > $cer = New-Object System.Security.Cryptography.X509Certificates.X509Certificate
 
-* Importieren Sie das vorher erstellte Zertifikat:
+2. Importieren Sie das vorher erstellte Zertifikat:
     > $cer.Import("<Path to Certificate (.cer) file created in prior step>")
     >In diesem Beispiel:  $cer.Import("C:\SPBilling.cer”)
 
-* Speichern Sie die Rohdaten des Zertifikates:
+3. Speichern Sie die Rohdaten des Zertifikates:
     > $binCert = $cer.GetRawCertData()
 
-* Und konvertieren Sie die Rohdaten von 8-Bit-Ganzzahlen ohne Vorzeichen in die entsprechende mit Base-64-Ziffern codierte Zeichenfolgendarstellung:
+4. Und konvertieren Sie die Rohdaten von 8-Bit-Ganzzahlen ohne Vorzeichen in die entsprechende mit Base-64-Ziffern codierte Zeichenfolgendarstellung:
     > $credValue = [System.Convert]::ToBase64String($binCert)
 
 <a name="add-cert"></a>
