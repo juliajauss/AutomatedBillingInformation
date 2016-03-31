@@ -6,7 +6,7 @@ $subscriptionID = "00dd302a-92a9-4ec6-a567-555b1bb1fad1"   #You get this under "
 $manualBillingAdmin = "Admin@juliabilling.onmicrosoft.com" #I created a new user in my Default Directory and added it under "Settings" > "Administrators" as Admin
 $certificateFile = "C:\JuliasCertificate.cer"
 
-#Programmatically create your Azure AD Application
+#Specify params for creating your Azure AD Application
 $appName = "JuliaBillingBlog"
 $dummyUrl = "http://JuliaBillingBlog"
 
@@ -22,8 +22,11 @@ Select-AzureRmSubscription -SubscriptionId $subscriptionID
 # Caveat: Microsoft Account with 2FA does not work: https://support.microsoft.com/en-us/kb/2929554
 Connect-MsolService -Credential $credential
 
+#Programmatically create your Azure AD Application
 $application = New-AzureRmADApplication -DisplayName $appName -HomePage $dummyUrl -IdentifierUris $dummyUrl -KeyType AsymmetricX509Cert -KeyValue $credValue
 Start-Sleep -Seconds 1
+
+#Create a Service Principal for your Azure AD Application
 New-AzureRmADServicePrincipal -ApplicationId $application.ApplicationId
 Start-Sleep -Seconds 1
 New-AzureRmRoleAssignment  -ServicePrincipalName $application.ApplicationId -RoleDefinitionName Contributor
